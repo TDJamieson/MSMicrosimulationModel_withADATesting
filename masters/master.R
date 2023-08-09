@@ -47,7 +47,7 @@
 #               Define arguments required for local processing                 #
 #===============================================================================
 
-    source(paste0(RProjectDirectory, 'masters/', 'masterArgs_local.R'))
+    source(paste0(RProjectDirectory, 'masters/', 'masterArgs_cluster.R'))
     
 #==============================================================================#
 
