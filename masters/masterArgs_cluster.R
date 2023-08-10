@@ -47,7 +47,9 @@
     
     
     if(exists(args[5])){
+      
       variation <- as.numeric(args[5])
+      print(variation)
       
     }
     

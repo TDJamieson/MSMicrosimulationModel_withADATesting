@@ -21,7 +21,8 @@
       library(data.table)   # Providing big data type containers for population
       library(doParallel)   # Providing capability for parallelising processes
       
-      library(stringr)      # -- String processing functiona
+                            # --
+      library(stringr)      # -- String processing functions
       library(stringi)      # --
       
       library(dqrng)        # Random numbers - 64-bit general purpose
@@ -33,24 +34,38 @@
 
 
 #===============================================================================
-#            Set overall project and R project directory                       #
+#       Set overall project, R project directory and define arguments          #
 #===============================================================================
 
-    rootDirectory <- "D:/QMULOneDrive/NIHR245601MSADA/"   
-    RProjectDirectory <- paste0(rootDirectory,"MSMicrosimulationModel/")
+
+  # Tests to see if being run locally or scripted and defines locations and 
+  # arguments accordingly using to separate arguments files
+
+    if (interactive() == TRUE){
+      
+      
+      rootDirectory <- "D:/QMULOneDrive/NIHR245601MSADA/"
+      
+      RProjectDirectory <- paste0(rootDirectory,"MSMicrosimulationModel_withADATesting/")
+      
+      source(paste0(RProjectDirectory, 'masters/', 'masterArgs_local.R'))
+      
+    
+      } else {
+      
+      
+      rootDirectory <- "/data/home/wpw004/NIHR245601MSADA/"
+      
+      RProjectDirectory <- paste0(rootDirectory,"MSMicrosimulationModel_withADATesting/")
+      
+      source(paste0(RProjectDirectory, 'masters/', 'masterArgs_cluster.R'))
+      
+      
+    }
+    
 
 #==============================================================================#
     
-    # hello branch
-
-#===============================================================================
-#               Define arguments required for local processing                 #
-#===============================================================================
-
-    source(paste0(RProjectDirectory, 'masters/', 'masterArgs_local.R'))
-    
-#==============================================================================#
-
 
 
 #===============================================================================
@@ -211,7 +226,17 @@
 # to satisfy the population size request split into manageable chunks
 # specified by 'maxPopSize'
 
-
+    
+    # If running on cluster then take a single MSSample split  to run through
+    # microsimulation process
+    
+    if(interactive() == FALSE){
+      
+      MSSampleSplits <- list(MSSampleSplits[[profile]])
+    
+    }
+    
+    
     for (iteration in 1:length(MSSampleSplits)) {
 
       MSSample <- MSSampleSplits[[iteration]]
@@ -312,7 +337,7 @@
 #===============================================================================
     
     
-    parallelise = 0
+ 
 #==============================================================================#
 #                          Initialise switching                                #
 #===============================================================================

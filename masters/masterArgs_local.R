@@ -26,7 +26,7 @@
     nCores = detectCores()-1
     setDTthreads(nCores)
     
-    parallelise = 1 
+    parallelise = 0 
     
   # ---- #
     
