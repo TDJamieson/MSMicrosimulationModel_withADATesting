@@ -48,7 +48,7 @@
       
       RProjectDirectory <- paste0(rootDirectory,"MSMicrosimulationModel_withADATesting/")
       
-      source(paste0(RProjectDirectory, 'lifeCourseMasters/', 'masterArgs_local.R'))
+      source(paste0(RProjectDirectory, 'lifeCourseMasters/', 'generateLifeCoursesMasterArgs_local.R'))
       
     
       } else {
@@ -58,7 +58,7 @@
       
       RProjectDirectory <- paste0(rootDirectory,"MSMicrosimulationModel_withADATesting/")
       
-      source(paste0(RProjectDirectory, 'lifeCourseMasters/', 'masterArgs_cluster.R'))
+      source(paste0(RProjectDirectory, 'lifeCourseMasters/', 'generateLifeCoursesMasterArgs_cluster.R'))
       
       
     }
