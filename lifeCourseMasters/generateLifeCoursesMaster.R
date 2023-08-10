@@ -71,51 +71,14 @@
 #===============================================================================
 #               Define directories to source, gather, and output               #
 #===============================================================================
-#                                                                              #
-# Four directories need to be defined - two are defined above, where the whole #
-# project directory is held and within that one where all R files              # 
-# associated with the microsimulation are held, one where universal input      #
-# values are held, and a directory where run-specific inputs are held and run  #
-# outputs are stored.                                                          #               
-#                                                                              #
-# ==============================================================================                                                
 
-
-  # R process directories --
+                                                                      
+  # Define all run non-specific locations
   
-    codeDirectory <- paste0(RProjectDirectory, "microsimulationCode/")
+    source(paste0(RProjectDirectory, 'universalCode/', 'defineDirectoryLocations.R'))
 
-    
-    # Input loading and parameterisation processes
-    microsimulationSetupDirectory <-                
-      paste0(codeDirectory, 'microsimulationSetup/') 
-    
-    
-    # Folder containing all microsimulation process file folders
-    microsimulationProcessDirectory <- 
-      paste0(codeDirectory, 'microsimulationProcess/')
-    
-    
-    # Switching processes subdirectory of microsimulation process folder
-    switchingDirectory <- paste0(codeDirectory, 'microsimulationProcessFiles/switchingProcesses/')
-    postProcessingDirectory <- paste0(codeDirectory, 'postMicrosimulationProcessing/')
-
-  # ---- # 
-
-    
-  # Set working directory as RProject directory --
-
-    setwd(RProjectDirectory)
-   
-  # ---- #  
-    
-    
-  # Universal inputs directory --
-    
-    universalInputDirectory <- paste0(rootDirectory, 'inputs_microsimulation/')
-
-  # ---- # 
-    
+  # ---- #
+  
 
   # Specific run directory (needs a 'run directory description' to be defined) --
 
@@ -123,18 +86,13 @@
 
   # ---- # 
     
-    
+ 
   # Output directories --
   
    suppressWarnings(
       dir.create(paste0(runDirectory, 'outputs_all/'))
     )
     outputDirectory <- paste0(runDirectory, 'outputs_all/')
-    
-    suppressWarnings(       
-      dir.create(paste0(runDirectory, 'outputs_aggregated/'))
-    )
-    allAggregateOutputsDirectory <- paste0(runDirectory, 'outputs_aggregated/')
     
   # ---- # 
 
@@ -188,19 +146,19 @@
 #------------------------------------------------------------------------------#
 
   # Run-specific components
-    source(paste0(microsimulationSetupDirectory, 'loadInputs/', "inputs_runControls.R"))
+    source(paste0(microsimulationInputProcessesDirectory, "inputs_runControls.R"))
     
   # Universal components
-    source(paste0(microsimulationSetupDirectory, 'loadInputs/', "inputs_universal.R"))
+    source(paste0(microsimulationInputProcessesDirectory, "inputs_universal.R"))
     
   # Project-specific components
-    source(paste0(microsimulationSetupDirectory, 'loadInputs/', "inputs_alemtuzumabADA.R"))
+    source(paste0(microsimulationInputProcessesDirectory, "inputs_alemtuzumabADA.R"))
     
   # Sense check inputs
-    source(paste0(microsimulationSetupDirectory, 'loadInputs/', "inputs_check.R"))
+    source(paste0(microsimulationInputProcessesDirectory, "inputs_check.R"))
   
   # Undertake some generic processing of inputs - e.g. PSA parameterisation
-    source(paste0(microsimulationSetupDirectory, 'loadInputs/', "inputs_prepare.R"))
+    source(paste0(microsimulationInputProcessesDirectory, "inputs_prepare.R"))
 
 #===============================================================================
     
@@ -238,7 +196,7 @@
     
     
     for (iteration in 1:length(MSSampleSplits)) {
-
+ 
       MSSample <- MSSampleSplits[[iteration]]
       setDT(MSSample)
 

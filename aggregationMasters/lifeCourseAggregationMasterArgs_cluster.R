@@ -21,9 +21,6 @@
 #                                                                              #
 # 3. Run Description - To describe the run for filename construction           #
 #                                                                              #
-# 4. Parallelise dummy - In single core cluster settings trying to parallelise #
-#                        is a waste of time and may lead to failure.  This     #
-#                        allows parallel processing to be switched on/off.     #
 #                                                                              #
 # 5. Variation - This optional but allows a variation of a particular input    #
 #                variable to passed in for sensitivity analyses.               #
@@ -38,15 +35,15 @@
     passedProfile <- as.integer(args[1])
     runDirectoryDescription <- args[2]
     runDescription <- args[3]
-    
+
     print(paste0('Profile: ', passedProfile))
     print(paste0('Run Directory Description: ', runDirectoryDescription))
     print(paste0('Run Description: ', runDescription))
+
     
-    
-    if(exists(args[5])){
+    if(exists(args[4])){
       
-      variation <- as.numeric(args[5])
+      variation <- as.numeric(args[4])
       print(variation)
       
     }

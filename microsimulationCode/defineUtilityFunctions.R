@@ -20,7 +20,7 @@ saveFile <- function(filename, objectToSave, savePath){
   
   # Read in files in directory
   
-  checkFiles <- list.files(allAggregateOutputsDirectory)
+  checkFiles <- list.files(aggregateOutputsDirectory)
   
   counter <<- 1    
   
